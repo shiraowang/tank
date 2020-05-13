@@ -8,9 +8,10 @@ import java.awt.event.WindowEvent;
  * @Author admin
  * @date 2020/5/13
  */
-public class T {
+public class StartGame {
 
     public static void main(String[] args) {
         TankFrame tankFrame = new TankFrame();
+
     }
 }
