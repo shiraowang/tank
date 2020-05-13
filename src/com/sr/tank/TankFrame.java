@@ -12,7 +12,10 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    int x = 100, y = 100;
+    int x = 400, y = 400;
+    //tank 方向  速度
+    Dir dir = Dir.DOWN;
+    private static final int SPEED = 10;
 
     public TankFrame() {
         setSize(800, 600);
@@ -31,38 +34,91 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        System.out.println("test01");
         g.fillRect(x, y, 50, 50);
-        //x += 10;
-//        x += 100;
-//        y += 100;
+        switch (dir) {
+            case UP:
+                y -= SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+            case LEFT:
+                x -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            default:
+                break;
+        }
+
     }
 
     class MyKeyListener extends KeyAdapter {
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
             switch (key) {
                 case KeyEvent.VK_LEFT:
-                    x -= 100;
+                    bL = true;
                     break;
                 case KeyEvent.VK_RIGHT:
-                    x += 100;
+                    bR = true;
                     break;
                 case KeyEvent.VK_UP:
-                    y += 100;
+                    bU = true;
                     break;
                 case KeyEvent.VK_DOWN:
-                    y -= 100;
+                    bD = true;
                     break;
                 default:
                     break;
             }
+
+            serMainTankDir();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
+            serMainTankDir();
+        }
+
+        private void serMainTankDir() {
+            if (bD) {
+                dir = Dir.DOWN;
+            }
+            if (bR) {
+                dir = Dir.RIGHT;
+            }
+            if (bU) {
+                dir = Dir.UP;
+            }
+            if (bL) {
+                dir = Dir.LEFT;
+            }
+
         }
     }
 }
