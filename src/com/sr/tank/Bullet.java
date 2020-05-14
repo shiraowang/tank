@@ -36,10 +36,22 @@ public class Bullet {
         if (!live) {
             tf.bulletList.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WITED, HEIGHT);
-        g.setColor(c);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourcesMge.bulletU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesMge.bulletD,  x, y,  null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesMge.bulletR,  x, y,  null);
+                break;
+            case LEFT:
+                g.drawImage(ResourcesMge.bulletL,  x, y, null);
+                break;
+            default:
+                break;
+        }
         move();
 
 

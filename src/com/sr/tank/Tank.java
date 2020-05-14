@@ -7,7 +7,7 @@ import java.awt.*;
  * @date 2020/5/13
  */
 public class Tank {
-    private int x , y;
+    private int x, y;
     //tank 方向  速度
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
@@ -15,7 +15,7 @@ public class Tank {
 
     private boolean moving = false;
 
-    public Tank(int x, int y, Dir dir,TankFrame tf) {
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -23,10 +23,23 @@ public class Tank {
     }
 
     public void print(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.green);
-        g.fillRect(x, y, 50, 50);
-        g.setColor(c);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourcesMge.tankU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesMge.tankD,  x, y,  null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesMge.tankR,  x, y,  null);
+                break;
+            case LEFT:
+                g.drawImage(ResourcesMge.tankL,  x, y, null);
+                break;
+            default:
+                break;
+        }
+
         move();
     }
 
@@ -52,8 +65,8 @@ public class Tank {
     }
 
     public void fire() {
-       tf.bullet = new Bullet(this.x,this.y,this.dir,tf);
-       tf.bulletList.add(tf.bullet);
+        tf.bullet = new Bullet(this.x, this.y, this.dir, tf);
+        tf.bulletList.add(tf.bullet);
     }
 
     public Dir getDir() {

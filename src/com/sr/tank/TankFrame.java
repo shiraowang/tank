@@ -14,11 +14,6 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-//    int x = 400, y = 400;
-//    //tank 方向  速度
-//    Dir dir = Dir.DOWN;
-//    private static final int SPEED = 10;
-
     Tank myTank = new Tank(100, 100, Dir.DOWN, this);
     Bullet bullet = new Bullet(50, 50, Dir.DOWN,this);
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -93,7 +88,6 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-
             serMainTankDir();
         }
 
@@ -115,7 +109,6 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_CONTROL:
                     myTank.fire();
-                    System.out.println("fire");
                     break;
                 default:
                     break;
