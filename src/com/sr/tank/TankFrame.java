@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author admin
@@ -17,9 +19,11 @@ public class TankFrame extends Frame {
 //    Dir dir = Dir.DOWN;
 //    private static final int SPEED = 10;
 
-    Tank myTank = new Tank(100, 100, Dir.DOWN);
-    Bullet bullet = new Bullet(20, 20, Dir.DOWN);
+    Tank myTank = new Tank(100, 100, Dir.DOWN, this);
+    Bullet bullet = new Bullet(50, 50, Dir.DOWN,this);
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+
+    List<Bullet> bulletList = new ArrayList<Bullet>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -35,8 +39,8 @@ public class TankFrame extends Frame {
         });
 
     }
-
     Image offScreenImage = null;
+
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
@@ -53,8 +57,15 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("现在的子弹数量:" + bulletList.size(), 10, 60);
+        g.setColor(c);
+
         myTank.print(g);
-        bullet.print(g);
+        for (int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).print(g);
+        }
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -101,6 +112,10 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = false;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    myTank.fire();
+                    System.out.println("fire");
                     break;
                 default:
                     break;
