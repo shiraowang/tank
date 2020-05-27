@@ -14,11 +14,13 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(100, 100, Dir.DOWN, this);
+    Tank myTank = new Tank(100, 400, Dir.DOWN, this);
     Bullet bullet = new Bullet(50, 50, Dir.DOWN,this);
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     List<Bullet> bulletList = new ArrayList<Bullet>();
+
+    List<Tank> badTankLists = new ArrayList<>();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -32,6 +34,9 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+        for (int i = 0; i < 5; i++) {
+            badTankLists.add(new Tank(100 + i * 50,200,Dir.DOWN,this));
+        }
 
     }
     Image offScreenImage = null;
@@ -55,7 +60,11 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("现在的子弹数量:" + bulletList.size(), 10, 60);
+        g.drawString("现在的tank数量:" + badTankLists.size(), 10, 90);
         g.setColor(c);
+        for (int i = 0; i < badTankLists.size(); i++) {
+            badTankLists.get(i).print(g);
+        }
 
         myTank.print(g);
         for (int i = 0; i < bulletList.size(); i++) {
