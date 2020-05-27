@@ -12,8 +12,9 @@ public class Bullet {
     private static final int SPEED = 10;
     private int x, y;
     private Dir dir;
-    private static final int WITED = 10, HEIGHT = 10;
     TankFrame tf = null;
+    public static int WIDTH = ResourcesMge.bulletD.getWidth();
+    public static int HEIGHT = ResourcesMge.bulletD.getHeight();
 
     private boolean live = true;
 

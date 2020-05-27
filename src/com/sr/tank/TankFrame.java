@@ -88,7 +88,7 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            serMainTankDir();
+            setMainTankDir();
         }
 
         @Override
@@ -113,10 +113,10 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            serMainTankDir();
+            setMainTankDir();
         }
 
-        private void serMainTankDir() {
+        private void setMainTankDir() {
             if (!bD && !bR && !bU && !bL) {
                 myTank.setMoving(false);
             } else {
